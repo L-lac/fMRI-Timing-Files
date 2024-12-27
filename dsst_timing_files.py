@@ -14,13 +14,6 @@ if not required_columns.issubset(df.columns):
   
 # calculating response time (2nd column of Type B file)
 df_selected['Duration'] = df_selected['stimulus_end_time'] - df_selected['stimulus_start_time']
-  
-#Uses lambda function to check if the response is correct or incorrect then combines it with the trial type
-#3rd column of Type B file
-df_selected['trial_type'] = df_selected.apply(
-  lamda row: f"{row['SetType'].lower()}_{'correct' if row['key_dsst_resp.corr'] == 1 else 'incorrect'}",
-      axis=1
-  )
 
 df_selected['Parametric Modulation'] = 1
 
