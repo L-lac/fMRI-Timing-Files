@@ -1,5 +1,5 @@
 # Extracting DSST Timing Files
-# Lena Lin :)
+#Script creates and prints an Excel and txt file for each subset of data: set1_nr_cor, set1_r_cor, set1_cor, set3_cor, and set9_cor
 
 import pandas as pd
 import os
@@ -27,11 +27,11 @@ df_selected['Parametric Modulation'] = 1
 #Separates it into 5 types of files: 1_r, 1_nr, 1 combining r and nr, 3 and 9 
 #Based on SetNum and SetType 
 subsets = {
-  "1_nr": df[(df['SetNum'] == 1) & (df['key_dsst_resp.corr'] == 0)],
-  "1_r": df[(df['SetNum'] == 1) & (df['key_dsst_resp.corr'] == 1)],
-  "1_combined": df[df['SetNum'] == 1],
-  "3": df[df['SetNum'] == 3],
-  "9": df[df['SetNum'] == 9],
+    "set1_nr_cor": df[(df['SetNum'] == 1) & (df['SetType'] == "nr") & (df['key_dsst_resp.corr'] == 1)],
+    "set1_r_cor": df[(df['SetNum'] == 1) & (df['SetType'] == "r") & (df['key_dsst_resp.corr'] == 1)],
+    "set1_cor": df[(df['SetNum'] == 1) & (df['key_dsst_resp.corr'] == 1)],
+    "set3_cor": df[(df['SetNum'] == 3) & (df['key_dsst_resp.corr'] == 1)],
+    "set9_cor": df[(df['SetNum'] == 9) & (df['key_dsst_resp.corr'] == 1)],
 }
 
 #Folders to save new Excel and timing file 
@@ -44,17 +44,21 @@ os.makedirs(timing_folder, exist_ok=True)
 for subset_name, set_data in set_definitions.items():
   if not set_data.empty:
     #Saves it as an Excel file in the specified folder and prints a confirmation message after completion 
-    excel_file = os.path.join(excel_folder, f"{set_name}.xlsx")
-    set_data.to_excel(excel_file, index=False)
+    excel_file = os.path.join(excel_folder, f"{subset_name}.xlsx")
+    subset_data.to_excel(excel_file, index=False)
     print(f"Excel file created: {excel_file}")
-    
+        
     #Creates a txt file for each subset containing 3 columns: Onset time, Duration, and Parametric Modulation
-    txt_file = os.path.join(txt_folder, f"{set_name}.txt")
-    timing_df = set_data[['stimulus_start_time', 'Duration', 'Parametric Modulation']]
-    # Rename for clarity
-    timing_df.columns = ['Onset Time', 'Duration', 'Parametric Modulation']  
-    #For Formatting purposes of the Type C file 
-    timing_df.to_csv(txt_file, sep='\t', index=False, header=False) 
-    print(f"Text file created: {txt_file}")   
-  
+    txt_file = os.path.join(txt_folder, f"{subset_name}.txt")
+    timing_df = subset_data[['stimulus_start_time', 'Duration', 'key_dsst_resp.corr']]
+    #Renames stimulus_start_time as Onset Time 
+    timing_df.columns = ['Onset Time', 'Duration', 'Parametric Modulation']
+      
+    #For formating purposes of the Type C txt file 
+    with open(txt_file, 'w') as f:
+    for _, row in timing_df.iterrows():
+        #Consistent spacing
+        f.write(f"{row['Onset Time']:.1f} {row['Duration']:.1f} {int(row['Parametric Modulation'])}\n")
+
+    print(f"Timing file created: {txt_file}")
 
