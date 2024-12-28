@@ -49,9 +49,9 @@ for subset_name, set_data in set_definitions.items():
       
     #For formating purposes of the Type C txt file 
     with open(txt_file, 'w') as f:
-    for _, row in timing_df.iterrows():
-        #Consistent spacing
-        f.write(f"{row['Onset Time']:.1f} {row['Duration']:.1f} {int(row['Parametric Modulation'])}\n")
+        for _, row in timing_df.iterrows():
+            #Consistent spacing
+            f.write(f"{row['Onset Time']:.1f} {row['Duration']:.1f} {int(row['Parametric Modulation'])}\n")
 
     print(f"Timing file created: {txt_file}")
 
