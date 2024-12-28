@@ -1,4 +1,4 @@
-# Overview:
+# Overview: :brain:	
 This repository contains a Python script that processes a dataset to generate both Excel and txt files formatted for fMRI analysis, specifically DSST. It splits the datset into 5 different subsets based on specific conditions (SetNum and SetType) and calculates the timing information for each trial. The resulting files are stored in 2 separate folders: 
   - excel_files: .xlsx
   - timing_files: .txt files formatted for tools like FSL
