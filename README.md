@@ -24,7 +24,7 @@ In the future if you need to further analyze your dataset for the trial_type col
 such as having congruent or incongruent_run1.txt files or handling correct/incorrect
 responses, use the lamda function. 
 
-###Ex: 
+### Example Code: 
 ```python
 df_selected['trial_type'] = df_selected.apply(
   lamda row: f"{row['SetType'].lower()}_{'correct' if row['key_dsst_resp.corr'] == 1 else 'incorrect'}",
@@ -33,5 +33,5 @@ df_selected['trial_type'] = df_selected.apply(
 ```
 This uses the lamda function to combine SetType and response correctness for column 3 (trial_type) of the Type B files. 
 
-##Contact:
+## Contact:
 If you have any questions or issues with the code, feel free to contact Lena Lin. :blush:
