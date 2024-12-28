@@ -7,9 +7,11 @@ This repository contains a Python script that processes a dataset to generate bo
     * Duration
     * Parametric Modulation: Always 1 in this scenario
     *  Sample Output:
+      ```
       0.0 2.0 1
       10.0 2.0 1
       40.0 2.0 1
+      ```
    
 This script generates the following subsets, focusing on only correct responses:
 * set1_nr_cor
