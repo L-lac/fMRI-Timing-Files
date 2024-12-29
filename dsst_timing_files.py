@@ -35,16 +35,16 @@ os.makedirs(excel_folder, exist_ok=True)
 os.makedirs(timing_folder, exist_ok=True)
 
 #Iterates through each set 
-for subset_name, set_data in set_definitions.items():
+for subset_name, set_data in subsets.items():
   if not set_data.empty:
     #Saves it as an Excel file in the specified folder and prints a confirmation message after completion 
     excel_file = os.path.join(excel_folder, f"{subset_name}.xlsx")
-    subset_data.to_excel(excel_file, index=False)
+    set_data.to_excel(excel_file, index=False)
     print(f"Excel file created: {excel_file}")
         
     #Creates a txt file for each subset containing 3 columns: Onset time, Duration, and Parametric Modulation
-    txt_file = os.path.join(txt_folder, f"{subset_name}.txt")
-    timing_df = subset_data[['stimulus_start_time', 'Duration', 'key_dsst_resp.corr']]
+    txt_file = os.path.join(timing_folder, f"{subset_name}.txt")
+    timing_df = set_data[['stimulus_start_time', 'Duration', 'key_dsst_resp.corr']]
     #Renames stimulus_start_time as Onset Time 
     timing_df.columns = ['Onset Time', 'Duration', 'Parametric Modulation']
       
