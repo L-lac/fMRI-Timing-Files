@@ -43,10 +43,9 @@ os.makedirs(timing_folder, exist_ok=True)
 #Iterates through each set 
 for subset_name, set_data in subsets.items():
   if not set_data.empty:
-    #Saves it as an Excel file in the specified folder and prints a confirmation message after completion 
+    #Saves it as an Excel file in the specified folder 
     excel_file = os.path.join(excel_folder, f"{subset_name}.xlsx")
     set_data.to_excel(excel_file, index=False)
-    print(f"Excel file created: {excel_file}")
         
     #Creates a txt file for each subset containing 3 columns: Onset time, Duration, and Parametric Modulation
     txt_file = os.path.join(timing_folder, f"{subset_name}.txt")
