@@ -30,7 +30,8 @@ subsets = {
 
 #Adds 'Duration' and 'Parametric Modulation' to each subset
 for subset_name, subset_data in subsets.items():
-    subsets[subset_name] = subset_data.copy()  # Make a copy to avoid modifying the original df
+    #Makes copy to avoid modifying the original df
+    subsets[subset_name] = subset_data.copy() 
     subsets[subset_name]['Duration'] = subsets[subset_name]['stimulus_end_time'] - subsets[subset_name]['stimulus_start_time']
     subsets[subset_name]['Parametric Modulation'] = 1
 
