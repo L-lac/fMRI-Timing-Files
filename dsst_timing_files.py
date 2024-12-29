@@ -11,7 +11,8 @@ df = pd.read_csv(file_path)
 required_columns = {'SetNum', 'SetType', 'stimulus_start_time', 'stimulus_end_time', 'key_dsst_resp.corr'}
 if not required_columns.issubset(df.columns):
     raise ValueError(f"Dataset must contain the following columns: {required_columns}")
-  
+    
+df_selected = df[['SetNum', 'SetType', 'stimulus_start_time', 'stimulus_end_time', 'key_dsst_resp.corr']].copy()
 # calculating response time (2nd column of Type B file)
 df_selected['Duration'] = df_selected['stimulus_end_time'] - df_selected['stimulus_start_time']
 
