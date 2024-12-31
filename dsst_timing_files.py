@@ -58,7 +58,7 @@ for subset_name, set_data in subsets.items():
     with open(txt_file, 'w') as f:
         for _, row in timing_df.iterrows():
             #Consistent spacing
-            f.write(f"{row['Onset Time']:.1f} {row['Duration']:.1f} {int(row['Parametric Modulation'])}\n")
+            f.write(f"{row['Onset Time']:.3f} {row['Duration']:.3f} {int(row['Parametric Modulation'])}\n")
 
     print(f"Timing file created: {txt_file}")
 
